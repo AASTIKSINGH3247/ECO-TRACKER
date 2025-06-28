@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoTracker - Carbon Footprint Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #e0f7ec, #c0f2dc);
+      color: #033d2c;
+      overflow-x: hidden;
+    }
+
+    nav {
+      background-color: #004d40;
+      color: white;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 1rem;
+      animation: fadeDown 1s ease-in-out;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #a7ffeb;
+    }
+
+    header {
+      background-color: #26a69a;
+      padding: 1rem 2rem;
+      color: white;
+      text-align: center;
+      animation: fadeDown 1s ease-in-out;
+    }
+
+    header h1 {
+      font-size: 2rem;
+    }
+
+    main {
+      padding: 2rem;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .tracker-section, .tips-section, .about-section, .feedback-section {
+      background-color: #ffffffcc;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .tracker-section:hover, .tips-section:hover, .about-section:hover, .feedback-section:hover {
+      transform: scale(1.02);
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: #00796b;
+    }
+
+    label, select, input, textarea {
+      display: block;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    input, select, textarea {
+      padding: 0.5rem;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    .result {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #004d40;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #26a69a;
+      color: white;
+      animation: fadeUp 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes fadeDown {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes fadeUp {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#calculate">Calculator</a>
+    <a href="#feedback">Feedback</a>
+  </nav>
+
+  <header id="home">
+    <h1>🌱 EcoTracker: Your Carbon Footprint Companion</h1>
+  </header>
+
+  <main>
+    <section class="about-section" id="about">
+      <h2>About the Creator</h2>
+      <p>Hello! I'm the creator of EcoTracker. My passion for the environment and sustainability inspired this tool to help everyone understand their daily impact and make eco-conscious choices.</p>
+    </section>
+
+    <section class="tracker-section" id="calculate">
+      <h2>Calculate Your Daily Carbon Footprint</h2>
+      <form id="carbonForm">
+        <label for="transport">Daily Commute (km):</label>
+        <input type="number" id="transport" name="transport" required />
+
+        <label for="electricity">Electricity Usage (kWh):</label>
+        <input type="number" id="electricity" name="electricity" required />
+
+        <label for="meals">Meat-based Meals Per Day:</label>
+        <input type="number" id="meals" name="meals" required />
+
+        <button type="submit">Calculate Footprint</button>
+      </form>
+      <div class="result" id="result"></div>
+    </section>
+
+    <section class="tips-section">
+      <h2>Tips to Reduce Your Footprint</h2>
+      <ul>
+        <li>Use public transport or bike for short distances.</li>
+        <li>Switch to energy-efficient appliances.</li>
+        <li>Eat more plant-based meals.</li>
+        <li>Recycle and reduce plastic usage.</li>
+        <li>Support local and sustainable brands.</li>
+      </ul>
+    </section>
+
+    <section class="feedback-section" id="feedback">
+      <h2>Share Your Feedback</h2>
+      <form id="feedbackForm">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="comments">Comments:</label>
+        <textarea id="comments" name="comments" rows="4" required></textarea>
+
+        <button type="submit">Submit Feedback</button>
+      </form>
+      <div id="feedbackMessage"></div>
+    </section>
+  </main>
+
+  <footer>
+    Made with 💚 by EcoTracker Team - 2025 | Views: <span id="viewCount">...</span>
+  </footer>
+
+  <script>
+    // Tracker
+    document.getElementById("carbonForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const transport = parseFloat(document.getElementById("transport").value);
+      const electricity = parseFloat(document.getElementById("electricity").value);
+      const meals = parseFloat(document.getElementById("meals").value);
+
+      const emission = (transport * 0.21) + (electricity * 0.5) + (meals * 2.5);
+      document.getElementById("result").innerText = `Estimated Daily Carbon Footprint: ${emission.toFixed(2)} kg CO₂`;
+    });
+
+    // Feedback
+    document.getElementById("feedbackForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const comments = document.getElementById("comments").value;
+      document.getElementById("feedbackMessage").innerText = `Thank you, ${name}, for your feedback! 🌿`;
+      document.getElementById("feedbackForm").reset();
+    });
+
+    // Simulate view count
+    let views = localStorage.getItem("ecoTrackerViews") || 0;
+    views++;
+    localStorage.setItem("ecoTrackerViews", views);
+    document.getElementById("viewCount").innerText = views;
+  </script>
+</body>
+</html>
