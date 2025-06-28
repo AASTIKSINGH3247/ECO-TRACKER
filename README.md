@@ -73,7 +73,12 @@ ECO TRACKER proves how technology can empower climate-conscious behavior by maki
 
 ## 📱 Screenshots & Demo
 
-> _Coming soon_ – Will include demo GIFs or app screenshots here.
+![Screenshot 2025-06-22 160636](https://github.com/user-attachments/assets/b4144a2d-e536-4f14-a641-1c57d44a082d)
+
+![Screenshot 2025-06-22 160726](https://github.com/user-attachments/assets/3ac7bbc1-d56d-4c9a-8232-8a29c1a2e2d7)
+
+![Screenshot 2025-06-22 160752](https://github.com/user-attachments/assets/f3c7788f-2bc2-4569-8b85-f01caaa1e86c)
+
 
 ---
 
